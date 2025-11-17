@@ -61,7 +61,7 @@
           <option value="latest">Sort: Latest</option>
           <option value="oldest">Sort: Oldest</option>
           <option value="title">Sort: A→Z</option>
-          <option value="progress">Sort: In‑progress</option>
+          <option value="progress">Sort: In-progress</option>
         </select>
         <button id="clearBtn" class="focus-ring rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-sm">Clear</button>
       </div>
@@ -100,16 +100,23 @@
     // ------------------------
     const lessons = [
       {
-        id: 'ch13',
-        title: 'Chapter 14 — Breakdown of Reading Comprehension Questions',
+        id: 'ch14',
+        title: 'Chapter 14 — Titanic Reading Breakdown',
         href: 'chapter_14.html',
         date: '2025-11-15',
         tags: ['Reading', 'Comprehension', 'Exam Skills', 'Analysis'],
-        keywords: 'Chapter 13 reading comprehension breakdown questions test exam analysis',
+        keywords: 'Chapter 14 Titanic reading comprehension breakdown questions test exam analysis',
         minutes: 12
       },
-      // Add more chapters like below:
-      // { id:'ch12', title:'Chapter 12 — Inference & Tone', href:'chapter_12.html', date:'2025-11-08', tags:['Reading','Inference'], keywords:'inference tone nuance', minutes:10 },
+      {
+        id: 'ch15',
+        title: 'Chapter 15 — Rewards for Kids Reading Breakdown',
+        href: 'Chapter_15_Reading_Breakdown.html',
+        date: '2025-11-17',
+        tags: ['Reading', 'Education', 'Motivation', 'Analysis'],
+        keywords: 'Chapter 15 rewards kids money education study motivation reading breakdown analysis',
+        minutes: 15
+      },
     ];
 
     const allTags = [...new Set(lessons.flatMap(l => l.tags))].sort();
@@ -238,54 +245,62 @@
 
       for(const item of items){
         const card = document.createElement('article');
-        card.className = 'lift rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 shadow-soft dark:shadow-softDark flex flex-col gap-3';
-        card.innerHTML = `
-          <header class="flex items-start gap-3">
-            <div class="text-2xl">📖</div>
-            <div class="min-w-0">
-              <h2 class="font-semibold text-slate-900 dark:text-slate-50 leading-tight">${item.title}</h2>
-              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">${fmtDate(item.date)} ・ ${item.minutes} min</p>
-            </div>
-            <a class="ml-auto focus-ring rounded-lg px-3 py-1.5 text-sm bg-indigo-600 text-white hover:bg-indigo-500" href="${item.href}" onclick='setLast(${JSON.stringify(item)})'>Open</a>
-          </header>
-          <div class="flex flex-wrap gap-2">
-            ${item.tags.map(t=>`<span class="text-xs border border-slate-300 dark:border-slate-700 rounded-full px-2 py-0.5">${t}</span>`).join('')}
-          </div>
-          <footer class="mt-auto flex items-center gap-3">
-            <label class="text-sm flex items-center gap-2 select-none">
-              <input type="radio" name="prog-${item.id}" value="todo" class="accent-indigo-600"> To‑do
-            </label>
-            <label class="text-sm flex items-center gap-2 select-none">
-              <input type="radio" name="prog-${item.id}" value="in" class="accent-indigo-600"> In progress
-            </label>
-            <label class="text-sm flex items-center gap-2 select-none">
-              <input type="radio" name="prog-${item.id}" value="done" class="accent-indigo-600"> Done
-            </label>
-          </footer>
-        `;
-        wrap.appendChild(card);
-
-        // Set radio from storage
+        card.className = 'lift rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 flex flex-col shadow-soft dark:shadow-softDark';
         const prog = getProgress()[item.id] ?? 'todo';
-        const radios = $$(`input[name="prog-${item.id}"]`, card);
-        const chosen = radios.find(r => r.value===prog); if(chosen) chosen.checked = true;
-        radios.forEach(r => r.addEventListener('change', (e)=>{
-          setProgress(item.id, e.target.value);
-        }));
+        const badgeColor =
+          prog === 'done' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300' :
+          prog === 'in'   ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300' :
+                            'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
+
+        card.innerHTML = `
+          <div class="flex items-start gap-2">
+            <div class="flex-1">
+              <h2 class="font-semibold text-sm sm:text-base mb-1">${item.title}</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">${fmtDate(item.date)} ・ 約${item.minutes}分</p>
+            </div>
+            <span class="text-[10px] px-2 py-1 rounded-full ${badgeColor}">
+              ${prog === 'done' ? '完了' : prog === 'in' ? '学習中' : '未着手'}
+            </span>
+          </div>
+          <div class="flex flex-wrap gap-1 mt-1 mb-3">
+            ${item.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${t}</span>`).join('')}
+          </div>
+          <div class="mt-auto flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <a href="${item.href}" class="focus-ring inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-full bg-indigo-600 text-white hover:bg-indigo-500">
+              開く
+              <span class="text-[10px]">→</span>
+            </a>
+            <div class="ml-auto flex gap-1">
+              <button data-prog="todo" data-id="${item.id}" class="prog-btn text-[10px] px-2 py-1 rounded-full border border-slate-200 dark:border-slate-700 ${prog==='todo'?'bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900':''}">未</button>
+              <button data-prog="in" data-id="${item.id}" class="prog-btn text-[10px] px-2 py-1 rounded-full border border-slate-200 dark:border-slate-700 ${prog==='in'?'bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900':''}">中</button>
+              <button data-prog="done" data-id="${item.id}" class="prog-btn text-[10px] px-2 py-1 rounded-full border border-slate-200 dark:border-slate-700 ${prog==='done'?'bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900':''}">完</button>
+            </div>
+          </div>
+        `;
+        card.addEventListener('click', (e)=>{
+          if(e.target.closest('.prog-btn')) return;
+          setLast(item);
+        });
+        wrap.appendChild(card);
       }
+
+      // bind progress buttons
+      $$('.prog-btn', wrap).forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          const id = btn.dataset.id;
+          const val = btn.dataset.prog;
+          setProgress(id, val);
+          renderCards();
+        });
+      });
     }
 
-    // Prefetch known pages for speed
-    for(const l of lessons){ const link = document.createElement('link'); link.rel='prefetch'; link.href=l.href; document.head.appendChild(link); }
-
     // Init
-    document.getElementById('year').textContent = new Date().getFullYear();
     renderTags();
     renderCards();
     renderContinue();
-
-    // Expose for debugging
-    window.__eci3 = { lessons };
+    $('#year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
