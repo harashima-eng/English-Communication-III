@@ -478,33 +478,6 @@
             padding-top: 10px;
         }
 
-        /* Scroll hints */
-        .scroll-hint {
-            position: fixed;
-            top: 80px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            background: rgba(15,23,42,0.85);
-            color: #f9fafb;
-            box-shadow: 0 8px 20px rgba(15,23,42,0.35);
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-8px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            z-index: 900;
-        }
-        .scroll-hint.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .scroll-hint-passage {
-            left: 18px;
-        }
-        .scroll-hint-questions {
-            right: 18px;
-        }
-
         /* Dual-pane highlight linking */
         .paragraph.linked-highlight {
             outline: 3px solid rgba(249,115,22,0.9);
@@ -535,9 +508,6 @@
             <h1>😴 Chapter 17</h1>
             <p>The History of Sleep Patterns<br>睡眠パターンの歴史</p>
         </div>
-
-        <div class="scroll-hint scroll-hint-passage">📖 Passage side scrolling</div>
-        <div class="scroll-hint scroll-hint-questions">❓ Question side scrolling</div>
 
         <div class="content">
             <!-- FULL PASSAGE SECTION -->
@@ -586,7 +556,7 @@
                     <div id="q1" class="question-content">
                         <div class="question-inner">
                             <div class="question-text">
-                                <strong>Question:</strong> 下線部(1)の実験の結果明らかになったことを、本文に即して日本語で書きなさい。
+                                <strong>Question:</strong> 下線部（1）の実験の最終的な結果を、日本語で簡潔に説明しなさい。
                             </div>
                             
                             <div class="underline-ref">
@@ -731,19 +701,26 @@
                 </div>
 
                 <!-- QUESTION 3 -->
-                <div class="question-section" data-target-paragraphs="3">
+                <div class="question-section" data-target-paragraphs="3,4">
                     <div class="question-header" onclick="toggleQuestion('q3')">
-                        <h3>問題 3: 日本語説明問題</h3>
+                        <h3>問題 3: 選択問題</h3>
                         <span class="toggle-icon">▼</span>
                     </div>
                     <div id="q3" class="question-content">
                         <div class="question-inner">
                             <div class="question-text">
-                                <strong>Question:</strong> 下線部(3)の具体的な内容を日本語で答えなさい。
+                                <strong>Question:</strong> 下線部（3）の内容を表すものとして最も適当なものを1つ選びなさい。
                             </div>
                             
                             <div class="underline-ref">
                                 <strong>Underlined text:</strong> His book presents more than 500 references to <span class="highlight">(3) a split sleeping pattern</span>
+                            </div>
+                            
+                            <div class="choices">
+                                <div class="choice">① A pattern of sleeping that is good for health</div>
+                                <div class="choice">② A pattern of sleeping that harmed people in the past</div>
+                                <div class="choice">③ A pattern of sleeping uninterrupted for long hours</div>
+                                <div class="choice">④ A pattern of sleeping with two parts</div>
                             </div>
 
                             <button class="show-answer-btn" onclick="showHint('hint3')" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">Show Hint / ヒントを見る 💭</button>
@@ -752,12 +729,16 @@
                                 <div class="box hint-box">
                                     <div class="box-title">ヒント(Hint)</div>
                                     <strong>考え方のヒント:</strong><br>
-                                    ✅ "a split sleeping pattern" = 分割された睡眠パターン<br>
+                                    ✅ "split" という単語の意味を考えよう（split = 分ける、分割する）<br>
                                     ✅ 具体的な説明は<strong>Paragraph 4</strong>にある!<br>
-                                    ✅ "Much like the experience of Wehr's subjects..." から具体例が始まる<br>
-                                    ✅ 時間と順序（first sleep → waking → second sleep）を含めよう<br><br>
+                                    ✅ "a first sleep... followed by a waking period... and then a second sleep"<br>
+                                    ✅ 各選択肢の意味:<br>
+                                    　① 健康に良い睡眠パターン<br>
+                                    　② 昔の人に害を与えた睡眠パターン<br>
+                                    　③ 長時間中断なく眠る睡眠パターン<br>
+                                    　④ 2つの部分からなる睡眠パターン<br><br>
                                     
-                                    <strong>どこを読む?</strong> → Paragraph 4の最初の文!
+                                    <strong>キーワード:</strong> "split" = 分割された → ???
                                 </div>
                             </div>
 
@@ -765,37 +746,69 @@
 
                             <div id="answer3" class="answer-section">
                                 <div class="box correct-box">
-                                    <div class="box-title">正解</div>
-                                    日没後約2時間で始まる最初の睡眠、その後の1〜2時間の覚醒期間、そして2回目の睡眠からなる睡眠パターン。
+                                    <div class="box-title">正解: ④</div>
+                                    A pattern of sleeping with two parts<br>
+                                    (2つの部分からなる睡眠パターン)
                                 </div>
 
                                 <div class="box strategy-box">
                                     <div class="box-title">読解ストラテジー(Reading Strategy)</div>
-                                    <strong>抽象的な表現の具体的内容を探す:</strong><br>
-                                    1. 下線部 "a split sleeping pattern" は<strong>抽象的</strong><br>
-                                    2. 具体的な説明は<strong>次の段落</strong>（Paragraph 4）にある<br>
-                                    3. "Much like the experience of Wehr's subjects" がヒント<br>
-                                    4. その後の "these references describe..." で具体的内容<br><br>
+                                    <strong>下線部の意味を問う問題の解き方:</strong><br>
+                                    1. <strong>キーワードを確認:</strong><br>
+                                       "a split sleeping pattern" → "split" = 分割された<br><br>
                                     
-                                    <strong>ポイント:</strong> 抽象→具体の流れを追う!
+                                    2. <strong>本文で具体的説明を探す:</strong><br>
+                                       Paragraph 4: "a first sleep... followed by a waking period... and then a second sleep"<br><br>
+                                    
+                                    3. <strong>選択肢と照合:</strong><br>
+                                       ④ "with two parts" = 2つの部分 = first sleep + second sleep<br><br>
+                                    
+                                    <strong>ポイント:</strong> "split" の語義と本文の説明が一致!
                                 </div>
 
                                 <div class="box passage-ref-box">
                                     <div class="box-title">本文からの証拠</div>
-                                    Paragraph 4: "these references describe <span class="highlight">a first sleep</span> which began about <span class="highlight">two hours after sunset</span>, followed by <span class="highlight">a waking period of one or two hours</span> and then <span class="highlight">a second sleep</span>."<br><br>
+                                    Paragraph 4: "these references describe <span class="highlight">a first sleep</span> which began about two hours after sunset, followed by a waking period of one or two hours and then <span class="highlight">a second sleep</span>."<br><br>
                                     
-                                    3つの要素:<br>
-                                    1. First sleep: 日没後約2時間で始まる<br>
-                                    2. Waking period: 1〜2時間<br>
-                                    3. Second sleep: 2回目の睡眠
+                                    → <strong>2つの睡眠</strong>（first sleep と second sleep）から成るパターン!
+                                </div>
+
+                                <div class="box incorrect-box">
+                                    <div class="box-title">なぜ①が不正解か</div>
+                                    <strong>①:</strong> "A pattern of sleeping that is good for health"<br>
+                                    (健康に良い睡眠パターン)<br><br>
+                                    
+                                    <strong>本文:</strong> 分割睡眠が「健康に良い」かどうかは<strong>言及されていない</strong><br><br>
+                                    
+                                    → <strong>本文にない内容!</strong> 本文は睡眠パターンの歴史を述べているだけ。
+                                </div>
+
+                                <div class="box incorrect-box">
+                                    <div class="box-title">なぜ②が不正解か</div>
+                                    <strong>②:</strong> "A pattern of sleeping that harmed people in the past"<br>
+                                    (昔の人に害を与えた睡眠パターン)<br><br>
+                                    
+                                    <strong>本文:</strong> 分割睡眠が人々に「害を与えた」という記述は<strong>ない</strong><br><br>
+                                    
+                                    → <strong>本文にない内容!</strong> むしろ自然なパターンとして描かれている。
+                                </div>
+
+                                <div class="box incorrect-box">
+                                    <div class="box-title">なぜ③が不正解か</div>
+                                    <strong>③:</strong> "A pattern of sleeping uninterrupted for long hours"<br>
+                                    (長時間中断なく眠る睡眠パターン)<br><br>
+                                    
+                                    <strong>本文:</strong> "split" = 分割された ≠ "uninterrupted" = 中断なく<br><br>
+                                    
+                                    → <strong>完全に逆!</strong> "split"（分割）と"uninterrupted"（中断なし）は正反対の意味。
                                 </div>
 
                                 <div class="box tip-box">
                                     <div class="box-title">Tips(コツ)</div>
-                                    ✅ 「具体的内容」を聞かれたら、抽象的表現の<strong>後</strong>を探す<br>
-                                    ✅ 段落をまたいで説明されることもある!<br>
-                                    ✅ 時間や順序を示す語に注目<br>
-                                    ✅ "first sleep → waking → second sleep" の流れで答える
+                                    ✅ 下線部の<strong>キーワード</strong>の意味をまず確認<br>
+                                    ✅ 本文で<strong>具体的な説明</strong>を探す<br>
+                                    ✅ 選択肢の日本語訳を頭の中で作る<br>
+                                    ✅ 「本文に書いていないこと」は選ばない!
                                 </div>
                             </div>
                         </div>
@@ -963,15 +976,15 @@
                     <div id="q6" class="question-content">
                         <div class="question-inner">
                             <div class="question-text">
-                                <strong>Question:</strong> 空所(6)に入る最も適切なものを選びなさい。<br><br>
+                                <strong>Question:</strong> 空所（6）に入れるのに最も適切なものを1つ選びなさい。<br><br>
                                 "Nighttime activities became fashionable, so people went to bed later, and (    6    )."
                             </div>
                             
                             <div class="choices">
-                                <div class="choice">① slept during the day</div>
-                                <div class="choice">② got up later</div>
-                                <div class="choice">③ stopped having a first and second sleep</div>
-                                <div class="choice">④ became less healthy</div>
+                                <div class="choice">① gradually lost interest in socializing</div>
+                                <div class="choice">② only had one period of sleep</div>
+                                <div class="choice">③ back to their former sleeping pattern</div>
+                                <div class="choice">④ woke up in the middle of the night</div>
                             </div>
 
                             <button class="show-answer-btn" onclick="showHint('hint6')" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">Show Hint / ヒントを見る 💭</button>
@@ -986,6 +999,12 @@
                                     ✅ 本文全体のテーマは何だった?<br>
                                     ✅ 「分割睡眠」がどうなったか思い出そう!<br><br>
                                     
+                                    <strong>各選択肢の意味:</strong><br>
+                                    ① 徐々に社交への興味を失った<br>
+                                    ② 1回の睡眠期間だけを取るようになった<br>
+                                    ③ 以前の睡眠パターンに戻った（文法的に不完全）<br>
+                                    ④ 夜中に目を覚ました<br><br>
+                                    
                                     <strong>論理の流れ:</strong><br>
                                     夜の活動が流行 → 遅く寝る → ???
                                 </div>
@@ -995,9 +1014,9 @@
 
                             <div id="answer6" class="answer-section">
                                 <div class="box correct-box">
-                                    <div class="box-title">正解: ③</div>
-                                    stopped having a first and second sleep<br>
-                                    (1回目と2回目の睡眠を取るのをやめた)
+                                    <div class="box-title">正解: ②</div>
+                                    only had one period of sleep<br>
+                                    (1回の睡眠期間だけを取るようになった)
                                 </div>
 
                                 <div class="box strategy-box">
@@ -1005,52 +1024,67 @@
                                     <strong>空所補充問題の解き方:</strong><br>
                                     1. <strong>文脈を把握:</strong><br>
                                        - 本文のテーマ: 分割睡眠の消滅<br>
-                                       - Paragraph 5: 分割睡眠への言及が消え始めた<br>
+                                       - Paragraph 5: 1920年代には分割睡眠の概念が完全に消えた<br>
                                        - Paragraph 6: その理由（街灯、夜の活動の増加）<br><br>
                                     
                                     2. <strong>論理の流れ:</strong><br>
-                                       夜の活動が流行 → 遅く寝る → 分割睡眠ができなくなる<br><br>
+                                       夜の活動が流行 → 遅く寝る → <strong>1回の睡眠のみ</strong>になる<br><br>
                                     
-                                    3. <strong>③が正解の理由:</strong><br>
-                                       本文全体の結論「分割睡眠の消滅」と一致!
+                                    3. <strong>②が正解の理由:</strong><br>
+                                       "only had one period of sleep" = 分割睡眠（2回）→ 連続睡眠（1回）への変化を表す!
+                                </div>
+
+                                <div class="box passage-ref-box">
+                                    <div class="box-title">本文からの証拠</div>
+                                    Paragraph 5: "By the 1920s, <span class="highlight">the idea of a first and second sleep had disappeared completely</span>."<br><br>
+                                    
+                                    → 2回の睡眠（first + second）がなくなった = <strong>1回の睡眠だけ</strong>になった!
                                 </div>
 
                                 <div class="box incorrect-box">
                                     <div class="box-title">なぜ①が不正解か</div>
-                                    <strong>本文:</strong> 夜が活動的になった<br>
-                                    <strong>①:</strong> 昼間に眠るようになった<br><br>
+                                    <strong>①:</strong> "gradually lost interest in socializing"<br>
+                                    (徐々に社交への興味を失った)<br><br>
                                     
-                                    → 本文に「昼間に眠る」という記述はない。むしろ休息時間が<strong>減った</strong>と書いてある。
+                                    <strong>本文:</strong> "socializing at night slowly became <strong>common</strong>"<br>
+                                    = 夜の社交は<strong>一般的になった</strong><br><br>
+                                    
+                                    → <strong>完全に逆!</strong> 社交への興味は増えた、減っていない。
                                 </div>
 
                                 <div class="box incorrect-box">
-                                    <div class="box-title">なぜ②が不正解か</div>
-                                    <strong>本文:</strong> 遅く寝るようになった<br>
-                                    <strong>②:</strong> 遅く起きるようになった<br><br>
+                                    <div class="box-title">なぜ③が不正解か</div>
+                                    <strong>③:</strong> "back to their former sleeping pattern"<br>
+                                    (以前の睡眠パターンに戻った)<br><br>
                                     
-                                    → 「遅く起きる」という記述は本文にない。また、本文のテーマ「分割睡眠の消滅」との関連がない。
+                                    <strong>問題点:</strong><br>
+                                    1. 文法的に不完全（"went" や "got" が必要）<br>
+                                    2. 内容も逆！人々は分割睡眠（former pattern）から<strong>離れた</strong>、戻ってない<br><br>
+                                    
+                                    → <strong>文法的にも内容的にも不適切!</strong>
                                 </div>
 
                                 <div class="box incorrect-box">
                                     <div class="box-title">なぜ④が不正解か</div>
-                                    <strong>本文:</strong> 睡眠パターンの変化について<br>
-                                    <strong>④:</strong> 健康でなくなった<br><br>
+                                    <strong>④:</strong> "woke up in the middle of the night"<br>
+                                    (夜中に目を覚ました)<br><br>
                                     
-                                    → 本文は「健康」については言及していない。テーマは睡眠パターンの歴史的変化。
+                                    <strong>本文:</strong> 夜中に目を覚ますのは<strong>昔の</strong>分割睡眠パターン<br><br>
+                                    
+                                    → <strong>時系列が逆!</strong> これは以前の習慣であり、街灯導入<strong>後</strong>にはなくなった。
                                 </div>
 
                                 <div class="box tip-box">
                                     <div class="box-title">Tips(コツ)</div>
                                     ✅ 空所補充は<strong>本文全体のテーマ</strong>と合う選択肢を選ぶ<br>
                                     ✅ 因果関係（so, because, therefore）に注目<br>
-                                    ✅ 本文に書いていないことは選ばない<br>
-                                    ✅ 論理的に最も自然な流れを考える
+                                    ✅ 本文に書いていることと<strong>逆</strong>のことは選ばない<br>
+                                    ✅ 文法的に正しいかどうかもチェック!
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- QUESTION 7 -->
                 <div class="question-section" data-target-paragraphs="1,2,3,4,5,6">
                     <div class="question-header" onclick="toggleQuestion('q7')">
@@ -1060,14 +1094,14 @@
                     <div id="q7" class="question-content">
                         <div class="question-inner">
                             <div class="question-text">
-                                <strong>Question:</strong> 本文の内容と一致するものをすべて選びなさい。
+                                <strong>Question:</strong> 本文の内容に一致するものをすべて選びなさい。（京都産業大・改）
                             </div>
                             
                             <div class="choices">
-                                <div class="choice">① Wehr asked the subjects to sleep in different patterns from each other.</div>
-                                <div class="choice">② Ekirch included references to prove the benefits of continuous sleep.</div>
-                                <div class="choice">③ Historical documents suggest that people long ago found a divided sleeping pattern normal.</div>
-                                <div class="choice">④ People who woke between periods of sleep engaged in personal and social activities.</div>
+                                <div class="choice">① Wehr asked the subjects to sleep in different patterns from each other in his experiment.</div>
+                                <div class="choice">② Ekirch included references in his book to prove the benefits of continuous sleep.</div>
+                                <div class="choice">③ Many references in Ekirch's book suggest that people long ago found a divided sleeping pattern normal.</div>
+                                <div class="choice">④ In the past, during the nighttime waking period, people engaged in personal and social activities.</div>
                             </div>
 
                             <button class="show-answer-btn" onclick="showHint('hint7')" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">Show Hint / ヒントを見る 💭</button>
@@ -1094,11 +1128,11 @@
                             <div id="answer7" class="answer-section">
                                 <div class="box correct-box">
                                     <div class="box-title">正解: ③ と ④</div>
-                                    ③ Historical documents suggest that people long ago found a divided sleeping pattern normal.<br>
-                                    (歴史的文書は、昔の人々が分割睡眠パターンを普通だと思っていたことを示唆している。)<br><br>
+                                    ③ Many references in Ekirch's book suggest that people long ago found a divided sleeping pattern normal.<br>
+                                    (Ekirchの本に含まれる多くの引用は、昔の人々が分割睡眠パターンを普通だと思っていたことを示唆している。)<br><br>
                                     
-                                    ④ People who woke between periods of sleep engaged in personal and social activities.<br>
-                                    (睡眠の間に起きた人々は、個人的・社会的な活動に従事した。)
+                                    ④ In the past, during the nighttime waking period, people engaged in personal and social activities.<br>
+                                    (昔、夜間の覚醒期間中、人々は個人的・社会的な活動に従事した。)
                                 </div>
 
                                 <div class="box strategy-box">
@@ -1111,8 +1145,10 @@
                                 </div>
 
                                 <div class="box passage-ref-box">
-                                    <div class="box-title">③の根拠 (Paragraph 4)</div>
-                                    "It's not just the number of references to this sleeping pattern that is significant, but it's also the way they refer to it, <span class="highlight">as if it were common knowledge</span>," Ekirch says.<br><br>
+                                    <div class="box-title">③の根拠 (Paragraph 3-4)</div>
+                                    <strong>Paragraph 3:</strong> "His book... presents more than <span class="highlight">500 references</span> to a split sleeping pattern"<br><br>
+                                    
+                                    <strong>Paragraph 4:</strong> "It's not just the number of references... but it's also the way they refer to it, <span class="highlight">as if it were common knowledge</span>," Ekirch says.<br><br>
                                     
                                     訳: 「この睡眠パターンへの言及の数だけが重要なのではなく、それがまるで<strong>常識であるかのように</strong>言及されている点も重要だ」<br><br>
                                     
@@ -1123,28 +1159,28 @@
                                     <div class="box-title">④の根拠 (Paragraph 5)</div>
                                     "During this waking period, people did all kinds of things. They often got up, <span class="highlight">went to the toilet or smoked tobacco</span> and <span class="highlight">some even visited neighbors</span>. People <span class="highlight">read, wrote, and often prayed</span>."<br><br>
                                     
-                                    個人的活動: トイレ、タバコ、読書、執筆、祈り<br>
-                                    社会的活動: 近所の人を訪問<br><br>
+                                    個人的活動 (personal): トイレ、タバコ、読書、執筆、祈り<br>
+                                    社会的活動 (social): 近所の人を訪問<br><br>
                                     
-                                    → ④ "engaged in personal and social activities" と一致!
+                                    → ④ "In the past, during the nighttime waking period, people engaged in <strong>personal and social activities</strong>" と一致!
                                 </div>
 
                                 <div class="box incorrect-box">
                                     <div class="box-title">なぜ①が不正解か</div>
-                                    <strong>①:</strong> "Wehr asked the subjects to sleep in <strong>different patterns from each other</strong>"<br>
-                                    (Wehrは被験者に互いに異なるパターンで寝るよう頼んだ)<br><br>
+                                    <strong>①:</strong> "Wehr asked the subjects to sleep in <strong>different patterns from each other</strong> in his experiment."<br>
+                                    (Wehrは実験で被験者に互いに異なるパターンで寝るよう頼んだ)<br><br>
                                     
                                     <strong>本文 (Paragraph 2):</strong><br>
                                     "a group of people were kept in darkness for 14 hours every day for a month"<br>
                                     = 全員が<strong>同じ条件</strong>（毎日14時間の暗闇）<br><br>
                                     
-                                    → <strong>本文と矛盾!</strong> 被験者は同じ条件で実験された。「異なるパターン」ではない。
+                                    → <strong>本文と矛盾!</strong> Wehrは被験者に異なるパターンで寝るよう「頼んだ」のではなく、全員を同じ条件に置いた。
                                 </div>
 
                                 <div class="box incorrect-box">
                                     <div class="box-title">なぜ②が不正解か</div>
-                                    <strong>②:</strong> "Ekirch included references to prove the benefits of <strong>continuous sleep</strong>"<br>
-                                    (Ekirchは連続睡眠の利点を証明するために引用を含めた)<br><br>
+                                    <strong>②:</strong> "Ekirch included references in his book to prove the benefits of <strong>continuous sleep</strong>"<br>
+                                    (Ekirchは本の中で連続睡眠の利点を証明するために引用を含めた)<br><br>
                                     
                                     <strong>本文 (Paragraph 3):</strong><br>
                                     "revealing a lot of historical evidence that humans used to sleep in <strong>two distinct periods</strong>"<br>
@@ -1226,31 +1262,8 @@
             }
         }
 
-        // Scroll hints and dual-pane linking setup
+        // Dual-pane highlight linking setup
         document.addEventListener('DOMContentLoaded', function () {
-            const passage = document.querySelector('.two-column-layout .passage-section') || document.querySelector('.passage-section');
-            const questions = document.querySelector('.two-column-layout .questions-container') || document.querySelector('.questions-container');
-            const passageHint = document.querySelector('.scroll-hint-passage');
-            const questionsHint = document.querySelector('.scroll-hint-questions');
-            let passageTimer = null;
-            let questionsTimer = null;
-
-            if (passage && passageHint) {
-                passage.addEventListener('scroll', function () {
-                    passageHint.classList.add('show');
-                    clearTimeout(passageTimer);
-                    passageTimer = setTimeout(() => passageHint.classList.remove('show'), 800);
-                });
-            }
-
-            if (questions && questionsHint) {
-                questions.addEventListener('scroll', function () {
-                    questionsHint.classList.add('show');
-                    clearTimeout(questionsTimer);
-                    questionsTimer = setTimeout(() => questionsHint.classList.remove('show'), 800);
-                });
-            }
-
             // Dual-pane highlight linking
             const paragraphs = document.querySelectorAll('.paragraph[data-paragraph]');
             const qSections = document.querySelectorAll('.question-section');
