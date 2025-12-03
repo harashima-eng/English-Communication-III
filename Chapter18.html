@@ -1,19 +1,50 @@
-C<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter 18: The Paradox of Happiness - Reading Breakdown</title>
     <style>
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-base: #0a0a0f;
+            --card-bg: linear-gradient(145deg, rgba(255,255,255,0.97) 0%, rgba(250,250,252,0.98) 50%, rgba(245,245,250,0.97) 100%);
+            --card-border: rgba(255,255,255,0.12);
+            --card-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --text-light: #f5f5f7;
+            --accent-primary: #3b82f6;
+            --accent-warm: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --radius-pill: 999px;
+            --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+            background:
+                radial-gradient(ellipse at 0% 0%, rgba(59, 130, 246, 0.25), transparent 50%),
+                radial-gradient(ellipse at 100% 0%, rgba(139, 92, 246, 0.2), transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(16, 185, 129, 0.15), transparent 55%),
+                linear-gradient(160deg, #0a0c14 0%, #070810 40%, #04060d 100%);
+            background-attachment: fixed;
+            color: var(--text-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
             padding: 0;
             line-height: 1.8;
@@ -22,40 +53,46 @@ C<!DOCTYPE html>
         .container {
             width: 100%;
             margin: 0;
-            background: white;
             min-height: 100vh;
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: var(--card-bg);
+            color: var(--text-primary);
             padding: 40px;
             text-align: center;
             transition: all 0.35s ease;
+            margin: 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-purple), var(--accent-warm));
         }
 
         body.header-collapsed .header {
-            padding: 10px 40px;
-        }
-
-        body.header-collapsed .header h1 {
-            font-size: 1.5em;
-            margin-bottom: 0;
-        }
-
-        body.header-collapsed .header p {
             display: none;
         }
 
         .header h1 {
-            font-size: 2.5em;
+            font-size: clamp(26px, 4.5vw, 2.5em);
+            font-weight: 800;
+            letter-spacing: -0.03em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.2;
+            color: var(--text-primary);
         }
 
         .header p {
             font-size: 1.2em;
-            opacity: 0.95;
+            color: var(--text-secondary);
         }
 
         /* Header collapse button - appears on hover at top center */
@@ -75,16 +112,20 @@ C<!DOCTYPE html>
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.2);
             padding: 8px 16px;
-            border-radius: 20px;
+            border-radius: var(--radius-pill);
             cursor: pointer;
             font-size: 0.9em;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: var(--transition);
             opacity: 0;
             pointer-events: none;
+            font-family: inherit;
         }
 
         .header-trigger-zone:hover + .header-collapse-btn,
@@ -94,7 +135,19 @@ C<!DOCTYPE html>
         }
 
         .header-collapse-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Button styling when header is hidden */
+        body.header-collapsed .header-collapse-btn {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-purple) 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+        }
+
+        body.header-collapsed .header-collapse-btn:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
         }
 
         /* Layout toggle button - appears on hover at top right */
@@ -112,16 +165,20 @@ C<!DOCTYPE html>
             top: 10px;
             right: 20px;
             z-index: 1000;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: var(--text-light);
+            border: 1px solid rgba(255,255,255,0.2);
             padding: 8px 16px;
-            border-radius: 20px;
+            border-radius: var(--radius-pill);
             cursor: pointer;
             font-size: 0.9em;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: var(--transition);
             opacity: 0;
             pointer-events: none;
+            font-family: inherit;
         }
 
         .layout-trigger-zone:hover + .layout-toggle-btn,
@@ -131,32 +188,55 @@ C<!DOCTYPE html>
         }
 
         .layout-toggle-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Layout toggle button styling when header is hidden */
+        body.header-collapsed .layout-toggle-btn {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-purple) 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+        }
+
+        body.header-collapsed .layout-toggle-btn:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
         }
 
         /* Translation section - hidden by default */
         .translation-section {
             display: none;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 15px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
             padding: 30px;
             margin-bottom: 30px;
-            border-left: 5px solid #28a745;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .translation-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent-green), var(--accent-primary));
         }
 
         .translation-section h2 {
-            color: #28a745;
+            color: var(--accent-green);
             margin-bottom: 20px;
             font-size: 1.8em;
+            font-weight: 700;
         }
 
         .translation-text {
-            background: white;
+            background: rgba(0,0,0,0.02);
             padding: 25px;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             line-height: 2.2;
             font-size: 1.05em;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: var(--text-primary);
         }
 
         .translation-paragraph {
@@ -164,13 +244,13 @@ C<!DOCTYPE html>
             text-align: justify;
             text-justify: inter-word;
             padding: 10px;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             transition: background 0.2s ease, outline 0.2s ease;
         }
 
         .trans-label {
-            font-weight: bold;
-            color: #28a745;
+            font-weight: 700;
+            color: var(--accent-green);
             display: block;
             margin-bottom: 8px;
             text-align: left;
@@ -218,7 +298,7 @@ C<!DOCTYPE html>
         .translation-paragraph.linked-highlight {
             outline: 3px solid rgba(249,115,22,0.9);
             background: rgba(255,237,213,0.9);
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
         }
 
         /* Clickable paragraphs in translation view */
@@ -230,7 +310,7 @@ C<!DOCTYPE html>
 
         body.translation-layout .paragraph:hover,
         body.translation-layout .translation-paragraph:hover {
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(59, 130, 246, 0.08);
         }
 
         body.translation-layout .paragraph:active,
@@ -239,7 +319,7 @@ C<!DOCTYPE html>
         }
 
         .content {
-            padding: 30px 3%;
+            padding: 30px 24px;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -272,6 +352,15 @@ C<!DOCTYPE html>
             padding-left: 20px;
         }
 
+        /* Extend columns to bottom when header is hidden */
+        body.header-collapsed.two-column-layout .content {
+            height: calc(100vh - 40px);
+        }
+
+        body.header-collapsed.translation-layout .content {
+            height: calc(100vh - 40px);
+        }
+
         /* Resizer */
         .column-resizer {
             display: none;
@@ -294,13 +383,13 @@ C<!DOCTYPE html>
             transform: translateX(-50%);
             width: 2px;
             height: 100%;
-            background: #ddd;
+            background: rgba(255,255,255,0.2);
             transition: background 0.2s ease;
         }
 
         .column-resizer:hover::after,
         .column-resizer.dragging::after {
-            background: #667eea;
+            background: var(--accent-primary);
             width: 4px;
         }
 
@@ -312,15 +401,15 @@ C<!DOCTYPE html>
             right: 20px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-purple) 100%);
+            border-radius: var(--radius-sm);
             cursor: pointer;
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s ease;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
         }
 
         body.two-column-layout .resize-handle-corner {
@@ -359,26 +448,37 @@ C<!DOCTYPE html>
         }
 
         .passage-section {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 15px;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
             padding: 30px;
             margin-bottom: 30px;
-            border-left: 5px solid #667eea;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .passage-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-purple));
         }
 
         .passage-section h2 {
-            color: #667eea;
+            color: var(--accent-primary);
             margin-bottom: 20px;
             font-size: 1.8em;
+            font-weight: 700;
         }
 
         .passage-text {
-            background: white;
+            background: rgba(0,0,0,0.02);
             padding: 25px;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             line-height: 2;
             font-size: 1.05em;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: var(--text-primary);
         }
 
         .paragraph {
@@ -387,12 +487,12 @@ C<!DOCTYPE html>
             text-justify: inter-word;
             transition: background 0.2s ease, outline 0.2s ease;
             padding: 10px;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
         }
 
         .para-label {
-            font-weight: bold;
-            color: #667eea;
+            font-weight: 700;
+            color: var(--accent-primary);
             display: block;
             margin-bottom: 8px;
             text-align: left;
@@ -400,7 +500,7 @@ C<!DOCTYPE html>
 
         .underline {
             text-decoration: underline;
-            text-decoration-color: #f5576c;
+            text-decoration-color: var(--accent-red);
             text-underline-offset: 3px;
         }
 
@@ -408,7 +508,7 @@ C<!DOCTYPE html>
         .paragraph.linked-highlight {
             outline: 3px solid rgba(249,115,22,0.9);
             background: rgba(255,237,213,0.9);
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
         }
 
         .question-section.linked-highlight {
@@ -418,14 +518,15 @@ C<!DOCTYPE html>
 
         .question-section {
             margin-bottom: 30px;
-            border-radius: 15px;
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
             transition: box-shadow 0.2s ease, transform 0.2s ease;
+            background: var(--card-bg);
         }
 
         .question-header {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-red) 100%);
             color: white;
             padding: 20px 25px;
             cursor: pointer;
@@ -436,7 +537,7 @@ C<!DOCTYPE html>
         }
 
         .question-header:hover {
-            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+            background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-purple) 100%);
         }
 
         .question-header h3 {
@@ -466,23 +567,24 @@ C<!DOCTYPE html>
 
         .question-inner {
             padding: 25px;
+            color: var(--text-primary);
         }
 
         .question-text {
-            background: #f8f9fa;
+            background: rgba(0,0,0,0.03);
             padding: 20px;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             margin-bottom: 20px;
-            border-left: 4px solid #f5576c;
+            border-left: 4px solid var(--accent-red);
             font-size: 1.1em;
         }
 
         .underline-ref {
-            background: #fff3cd;
+            background: rgba(245, 158, 11, 0.1);
             padding: 15px 20px;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             margin-bottom: 20px;
-            border-left: 4px solid #ffc107;
+            border-left: 4px solid var(--accent-warm);
         }
 
         .choices {
@@ -492,30 +594,31 @@ C<!DOCTYPE html>
         .choice {
             padding: 12px 20px;
             margin: 8px 0;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 3px solid #6c757d;
+            background: rgba(0,0,0,0.03);
+            border-radius: var(--radius-sm);
+            border-left: 3px solid var(--text-secondary);
             transition: all 0.2s ease;
         }
 
         .choice:hover {
-            background: #e9ecef;
+            background: rgba(0,0,0,0.06);
             transform: translateX(5px);
         }
 
         .show-hint-btn {
             background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-            color: #333;
+            color: var(--text-primary);
             border: none;
             padding: 15px 40px;
-            border-radius: 50px;
+            border-radius: var(--radius-pill);
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(142, 197, 252, 0.4);
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(142, 197, 252, 0.4);
             margin: 20px 10px 20px 0;
             display: inline-block;
+            font-family: inherit;
         }
 
         .show-hint-btn:hover {
@@ -524,23 +627,24 @@ C<!DOCTYPE html>
         }
 
         .show-answer-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-purple) 100%);
             color: white;
             border: none;
             padding: 15px 40px;
-            border-radius: 50px;
+            border-radius: var(--radius-pill);
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
             margin: 20px 0;
             display: inline-block;
+            font-family: inherit;
         }
 
         .show-answer-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
         }
 
         .hint-section, .answer-section {
@@ -560,56 +664,56 @@ C<!DOCTYPE html>
 
         .box {
             padding: 20px;
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
         }
 
         .correct-box {
-            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
-            border-left: 5px solid #28a745;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%);
+            border-left: 4px solid var(--accent-green);
         }
 
         .strategy-box {
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
-            border-left: 5px solid #007bff;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.08) 100%);
+            border-left: 4px solid var(--accent-primary);
         }
 
         .hint-box {
-            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-            border-left: 5px solid #9b59b6;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border-left: 4px solid var(--accent-purple);
         }
 
         .context-box {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border-left: 5px solid #ff9800;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.08) 100%);
+            border-left: 4px solid var(--accent-warm);
         }
 
         .passage-ref-box {
-            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
-            border-left: 5px solid #6c757d;
+            background: rgba(0,0,0,0.04);
+            border-left: 4px solid var(--text-secondary);
         }
 
         .incorrect-box {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-            border-left: 5px solid #dc3545;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(239, 68, 68, 0.06) 100%);
+            border-left: 4px solid var(--accent-red);
         }
 
         .tip-box {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            border-left: 5px solid #17a2b8;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%);
+            border-left: 4px solid #06b6d4;
         }
 
         .box-title {
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.1em;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 2px solid rgba(0,0,0,0.1);
+            border-bottom: 2px solid rgba(0,0,0,0.08);
         }
 
         .highlight {
-            background: linear-gradient(to bottom, transparent 60%, #ffd700 60%);
+            background: linear-gradient(to bottom, transparent 60%, rgba(245, 158, 11, 0.4) 60%);
             padding: 0 3px;
         }
 
@@ -622,28 +726,28 @@ C<!DOCTYPE html>
         }
 
         .chart-option {
-            border: 3px solid #ddd;
-            border-radius: 10px;
+            border: 2px solid rgba(0,0,0,0.08);
+            border-radius: var(--radius-md);
             padding: 15px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
+            transition: var(--transition);
+            background: rgba(0,0,0,0.02);
             width: 180px;
         }
 
         .chart-option:hover {
-            border-color: #667eea;
+            border-color: var(--accent-primary);
             transform: scale(1.02);
         }
 
         .chart-option.correct {
-            border-color: #28a745;
-            background: #d4fc79;
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
         }
 
         .chart-label {
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 10px;
             font-size: 1.2em;
         }
@@ -658,14 +762,23 @@ C<!DOCTYPE html>
 
         .bar {
             width: 30px;
-            background: linear-gradient(to top, #667eea, #764ba2);
+            background: linear-gradient(to top, var(--accent-primary), var(--accent-purple));
             border-radius: 4px 4px 0 0;
         }
 
-        .bar.actual { background: linear-gradient(to top, #28a745, #85d693); }
-        .bar.required { background: linear-gradient(to top, #f5576c, #f093fb); }
+        .bar.actual { background: linear-gradient(to top, var(--accent-green), #34d399); }
+        .bar.required { background: linear-gradient(to top, var(--accent-red), var(--accent-purple)); }
 
         @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .header {
+                margin: 0 0 16px 0;
+                padding: 24px 20px;
+            }
+
             body.two-column-layout .content {
                 flex-direction: column;
                 height: auto;
@@ -696,6 +809,10 @@ C<!DOCTYPE html>
             .header-collapse-btn {
                 opacity: 1;
                 pointer-events: auto;
+                background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-purple) 100%);
+                color: white;
+                border: none;
+                box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
             }
 
             .layout-toggle-btn {
@@ -752,7 +869,7 @@ C<!DOCTYPE html>
                         These facts are truly depressing, because they mean that <span class="underline">(5)we cannot be happier however much money we might get</span>. But at the same time, they teach us a useful lesson: financial success is not always necessary for your happiness, and to find another aspect of life that satisfies you is an easier way of becoming happy.
                     </div>
 
-                    <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 0.95em;">
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.03); border-radius: 10px; font-size: 0.95em; border-left: 4px solid var(--accent-warm);">
                         <strong>* 注釈:</strong><br>
                         paradox「逆説」<br>
                         Gallup Poll「ギャラップ調査」(世論調査の一種)
